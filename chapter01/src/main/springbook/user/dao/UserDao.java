@@ -9,14 +9,12 @@ import java.sql.SQLException;
 import main.springbook.user.domain.User;
 
 
+/**
+ * 1.1.2 UserDao
+ * JDBC를 이용한 등록과 조회 기능이 있는 UserDao 클래스
+ * - mysql 5.1v
+ */
 public class UserDao {
-	/**
-	 * 1.1.2 UserDao
-	 * JDBC를 이용한 등록과 조회 기능이 있는 UserDao 클래스
-	 * - mysql 5.1v
-	 */
-	
-	
 	public void add(User user) throws ClassNotFoundException, SQLException{ // 예외는 메소드 밖으로 던짐
 		
 		// DB와 연결
