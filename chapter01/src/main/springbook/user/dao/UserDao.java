@@ -22,6 +22,7 @@ public class UserDao {
 	
 	public UserDao(ConnectionMaker connectionMaker) {
 		this.connectionMaker = connectionMaker;
+		// DConnectionMaker를 생성하는 코드를 UserDao의 클라이언트에게 넘겨버림
 	}
 	
 	public void add(User user) throws ClassNotFoundException, SQLException{ // 예외는 메소드 밖으로 던짐
