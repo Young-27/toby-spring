@@ -15,6 +15,15 @@ import main.springbook.user.domain.User;
  * - mysql 5.1v
  */
 public class UserDao {
+	
+	private ConnectionMaker connectionMaker;
+	
+	public UserDao() {}
+	
+	public UserDao(ConnectionMaker connectionMaker) {
+		this.connectionMaker = connectionMaker;
+	}
+	
 	public void add(User user) throws ClassNotFoundException, SQLException{ // 예외는 메소드 밖으로 던짐
 		
 		// DB와 연결
