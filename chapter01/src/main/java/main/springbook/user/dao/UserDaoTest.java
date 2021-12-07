@@ -2,11 +2,17 @@ package main.springbook.user.dao;
 
 import java.sql.SQLException;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 /**
  * 1.3.3 관계설정 책임의 분리
  * - 관계설정 책임이 추가된 메소드
  * - 클라이언트 코드
  * - UserDao의 변경 없이 다른 사용자가 자유로운 DB 접속 클래스를 만들어 사용 가능
+ * 
+ * 1.5.1
+ * 애플리케이션 컨텍스트를 적용한 UserDaoTest
  */
 public class UserDaoTest {
 
@@ -20,7 +26,13 @@ public class UserDaoTest {
 		UserDao dao = new UserDao(connectionMaker);
 		*/
 		
-		UserDao dao = new DaoFactory().userDao();
+		
+		//UserDao dao = new DaoFactory().userDao();
+		
+		// 1.5.1 애플리케이션 컨텍스트 적용
+		ApplicationContext context = new AnnotationConfigApplicationContext(DaoFactory.class);
+		UserDao dao = context.getBean("userDao", UserDao.class);
+		
 	}
 
 }
