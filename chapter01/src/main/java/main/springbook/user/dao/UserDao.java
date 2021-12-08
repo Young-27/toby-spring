@@ -17,12 +17,45 @@ import main.springbook.user.domain.User;
 public class UserDao {
 	
 	private ConnectionMaker connectionMaker;
+	private Connection c;
+	private User user;
 	
 	public UserDao() {}
 	
 	public UserDao(ConnectionMaker connectionMaker) {
 		this.connectionMaker = connectionMaker;
 		// DConnectionMaker를 생성하는 코드를 UserDao의 클라이언트에게 넘겨버림
+	}
+	
+	// 싱글톤 패턴 적용 -> 자신과 같은 타입의 스태틱 필드를 정의
+	private static UserDao INSTANCE;
+	
+	public static synchronized UserDao getInstance() {
+		if(INSTANCE == null) INSTANCE = new UserDao(/*connectionMaker*/);
+		return INSTANCE;
+	}
+	// 결과 => 코드가 지저분해짐, private 생성자를 외부에서 호출할 수 없기 때문에 ConnectionMaker 오브젝트 넣어주기 불가능 
+	
+	
+	// 인스턴스 변수를 사용하도록 수정
+	public User get(String id) throws ClassNotFoundException, SQLException{
+		this.c = connectionMaker.makeConnection();
+		
+		PreparedStatement ps = c.prepareStatement("select * from users where id = ?");
+		ps.setString(1, id);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		
+		this.user = new User();
+		this.user.setId(rs.getString("id"));
+		this.user.setName(rs.getString("name"));
+		this.user.setPassword(rs.getString("password"));
+		
+		rs.close();
+		ps.close();
+		c.close();
+		
+		return user;
 	}
 	
 	public void add(User user) throws ClassNotFoundException, SQLException{ // 예외는 메소드 밖으로 던짐
@@ -46,12 +79,14 @@ public class UserDao {
 		c.close();
 	}
 	
+	
+	/*
 	public User get(String id) throws ClassNotFoundException, SQLException{
 		/*
 		 * Class.forName("com.mysql.jdbc.Driver"); Connection c =
 		 * DriverManager.getConnection("jdbc:mysql://localhost/springbook", "spring",
 		 * "book");
-		 */
+		 *//*
 		Connection c = getConnection();
 		
 		PreparedStatement ps = c.prepareStatement("select * from users where id = ?");
@@ -70,7 +105,7 @@ public class UserDao {
 		
 		return user;
 	}
-	
+	*/
 	/**
 	 * 1.2.2
 	 * getConnection() 메소드를 추출해서 중복을 제거

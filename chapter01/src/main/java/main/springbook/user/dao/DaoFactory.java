@@ -1,5 +1,7 @@
 package main.springbook.user.dao;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -22,5 +24,26 @@ public class DaoFactory {
 	@Bean
 	public ConnectionMaker connectionMaker() {
 		return new DConnectionMaker();
+	}
+	
+	public static void main(String[] args) {
+		DaoFactory factory = new DaoFactory();
+		UserDao dao1 = factory.userDao();
+		UserDao dao2 = factory.userDao();
+		
+		System.out.println(dao1);
+		System.out.println(dao2);
+		// => 각기 다른 값을 가진 오브젝트임을 알 수 있다. 
+		// => userDao를 호출할 때 마다 새로운 오브젝트 생성
+		
+		ApplicationContext context = new AnnotationConfigApplicationContext(DaoFactory.class);
+		UserDao dao3 = context.getBean("userDao", UserDao.class);
+		UserDao dao4 = context.getBean("userDao", UserDao.class);
+		
+		System.out.println(dao3);
+		System.out.println(dao4);
+		System.out.println(dao3 == dao4); // true
+		// 두 오브젝트의 출력 값이 같다.
+		
 	}
 }
