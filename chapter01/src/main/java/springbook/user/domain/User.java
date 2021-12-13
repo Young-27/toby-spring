@@ -1,4 +1,4 @@
-package main.springbook.user.domain;
+package springbook.user.domain;
 
 
 /**

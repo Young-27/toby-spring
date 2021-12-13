@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import main.springbook.user.domain.User;
+import springbook.user.domain.User;
 
 /**
  * 1.3.2 인터페이스의 도입

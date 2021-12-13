@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import main.springbook.user.domain.User;
+import springbook.user.domain.User;
 
 /**
  *  1.2.3 DB 컨넥션 만들기 독립
