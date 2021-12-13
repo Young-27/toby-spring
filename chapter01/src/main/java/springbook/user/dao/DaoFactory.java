@@ -1,4 +1,4 @@
-package main.springbook.user.dao;
+package springbook.user.dao;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;

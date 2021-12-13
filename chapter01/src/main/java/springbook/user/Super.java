@@ -1,4 +1,4 @@
-package main.springbook.user;
+package springbook.user;
 
 
 // 템플릿 메소드 패턴
