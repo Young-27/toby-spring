@@ -36,6 +36,10 @@ public class UserDao {
 	}
 	// 결과 => 코드가 지저분해짐, private 생성자를 외부에서 호출할 수 없기 때문에 ConnectionMaker 오브젝트 넣어주기 불가능 
 	
+	// setter 메소드
+	public void setConnectionMaker(ConnectionMaker connectionMaker) {
+		this.connectionMaker = connectionMaker;
+	}
 	
 	// 인스턴스 변수를 사용하도록 수정
 	public User get(String id) throws ClassNotFoundException, SQLException{

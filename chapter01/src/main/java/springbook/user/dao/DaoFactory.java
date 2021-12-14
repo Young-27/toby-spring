@@ -17,8 +17,8 @@ import org.springframework.context.annotation.Configuration;
 public class DaoFactory {
 	@Bean // => 오브젝트 생성을 담당하는 IoC용 메소드라는 표시
 	public UserDao userDao() {
-		ConnectionMaker connectionMaker = new DConnectionMaker();
-		UserDao userDao = new UserDao(connectionMaker);
+		UserDao userDao = new UserDao();
+		userDao.setConnectionMaker(connectionMaker()); // 수정자 메소드 DI를 사용
 		return userDao;
 	}
 	@Bean
