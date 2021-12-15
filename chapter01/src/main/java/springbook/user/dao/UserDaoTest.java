@@ -3,7 +3,7 @@ package springbook.user.dao;
 import java.sql.SQLException;
 
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
 
 /**
  * 1.3.3 관계설정 책임의 분리
@@ -30,7 +30,8 @@ public class UserDaoTest {
 		//UserDao dao = new DaoFactory().userDao();
 		
 		// 1.5.1 애플리케이션 컨텍스트 적용
-		ApplicationContext context = new AnnotationConfigApplicationContext(DaoFactory.class);
+		//ApplicationContext context = new AnnotationConfigApplicationContext(DaoFactory.class);
+		ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
 		UserDao dao = context.getBean("userDao", UserDao.class);
 		
 	}
